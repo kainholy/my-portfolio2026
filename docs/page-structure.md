@@ -1,9 +1,7 @@
-# サイト要件定義
+# ページ構成
 
-ポートフォリオサイト（my-portfolio2026）の要件を管理するドキュメント。
-仕様の変更・追加はこのファイルを更新して管理する。
+ポートフォリオサイト（my-portfolio2026）のページ構成と、各セクションに載せる内容をまとめたドキュメント。
 
-- 技術スタック: Astro / SCSS / GSAP / Swiper
 - 関連 Issue: [#1 ページの構成を決める](https://github.com/kainholy/my-portfolio2026/issues/1)
 
 ---
