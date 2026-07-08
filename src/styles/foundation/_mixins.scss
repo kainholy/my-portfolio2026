@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+// media query mixin
+@mixin respond-to($media) {
+  @media #{$media} {
+    @content;
+  }
+}
+
+@mixin sp-view {
+  @include respond-to($sp-size) {
+    @content;
+  }
+}
+
+@mixin pc-view {
+  @include respond-to($pc-size) {
+    @content;
+  }
+}
+
+// viewport width mixin
+@function pvw($px) {
+  @return calc($px / 1440 * 100vw);
+}
+
+@function svw($px) {
+  @return calc($px / 390 * 100vw);
+}

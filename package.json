@@ -1,0 +1,25 @@
+{
+  "name": "tokai_cgc",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:staging": "PUBLIC_NOINDEX=true PUBLIC_SHOW_FV_PATTERN_SWITCHER=true astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^6.4.4",
+    "gsap": "^3.15.0",
+    "sharp": "^0.34.5",
+    "swiper": "^12.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "sass": "^1.100.0"
+  }
+}

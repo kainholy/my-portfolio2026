@@ -1,0 +1,33 @@
+---
+import '@/styles/global.scss';
+import { site } from '@/config/site';
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
+const noindex = String(import.meta.env.PUBLIC_NOINDEX).toLowerCase() === 'true';
+---
+
+<!doctype html>
+<html lang={site.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style lang="scss">
+
+</style>
