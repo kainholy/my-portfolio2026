@@ -1,0 +1,185 @@
+---
+import { Image } from 'astro:assets';
+import type { WorkItem } from '@/types/topPage';
+
+interface Props {
+  work: WorkItem;
+  /** lead: 上部に大きく並べる / rest: 下部に小さく並べる */
+  variant: 'lead' | 'rest';
+  /** 外部リンクの文言 */
+  visitLabel: string;
+}
+
+const { work, variant, visitLabel } = Astro.props;
+---
+
+<article class:list={['work', `work--${variant}`]} data-reveal>
+  {
+    work.url ? (
+      <a class="work__thumbnail-link" href={work.url} target="_blank" rel="noopener">
+        <div class="work__thumbnail">
+          {work.thumbnail ? (
+            <Image
+              class="work__thumbnail-image"
+              src={work.thumbnail}
+              alt=""
+              format="webp"
+              widths={[400, 800]}
+              sizes="(max-width: 768px) 100vw, 480px"
+            />
+          ) : (
+            <span class="work__thumbnail-placeholder">screenshot</span>
+          )}
+        </div>
+      </a>
+    ) : (
+      <div class="work__thumbnail">
+        {work.thumbnail ? (
+          <Image
+            class="work__thumbnail-image"
+            src={work.thumbnail}
+            alt=""
+            format="webp"
+            widths={[400, 800]}
+            sizes="(max-width: 768px) 100vw, 480px"
+          />
+        ) : (
+          <span class="work__thumbnail-placeholder">screenshot</span>
+        )}
+      </div>
+    )
+  }
+
+  <div class="work__meta">
+    <span class="work__number">{work.number}</span>
+    <span class="work__category">{work.category}</span>
+  </div>
+
+  <h3 class="work__name">{work.name}</h3>
+
+  {variant === 'lead' && <p class="work__description">{work.description}</p>}
+
+  {
+    work.url && (
+      <a class="work__visit" href={work.url} target="_blank" rel="noopener">
+        {visitLabel}
+      </a>
+    )
+  }
+</article>
+
+<style lang="scss">
+  @use 'foundation' as *;
+
+  .work {
+    display: flex;
+    flex-direction: column;
+
+    &__thumbnail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: repeating-linear-gradient(
+        135deg,
+        $placeholder,
+        $placeholder 8px,
+        $panel 8px,
+        $panel 16px
+      );
+      border: 1px solid $line;
+    }
+
+    &__thumbnail-link {
+      display: block;
+    }
+
+    &__thumbnail-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__thumbnail-placeholder {
+      @include font-mono;
+
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      color: $muted;
+    }
+
+    &__meta {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    &__number {
+      @include font-en;
+
+      font-style: italic;
+      font-size: 13px;
+      color: $accent;
+    }
+
+    &__category {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: $muted;
+    }
+
+    &__name {
+      @include heading-work-lead;
+
+      margin: 9px 0 0;
+    }
+
+    &__description {
+      margin: 14px 0 0;
+      font-size: 13.5px;
+      line-height: 1.9;
+      letter-spacing: 0.06em;
+      color: $sub;
+    }
+
+    &__visit {
+      @include font-en;
+
+      margin-top: 14px;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      color: $accent;
+    }
+
+    &--rest {
+      .work__meta {
+        gap: 9px;
+        margin-top: 16px;
+      }
+
+      .work__number {
+        font-size: 12px;
+      }
+
+      .work__category {
+        font-size: 9.5px;
+      }
+
+      .work__name {
+        @include heading-work-rest;
+
+        margin: 8px 0 0;
+      }
+
+      .work__visit {
+        margin-top: 12px;
+        font-size: 13px;
+      }
+    }
+  }
+</style>
