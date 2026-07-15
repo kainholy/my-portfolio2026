@@ -1,19 +1,33 @@
 // Colors, typography, breakpoints
+// デザイン（Portfolio Top.dc.html）を正とする。docs/design-tokens.md 参照
 
-$bg-wh: #fff;
-$bg-cream: #FDFAF1;
-$bg-red: #e60039;
-$text-bk: #010101;
-$text-red:#e60039;
-$text-wh: #fff;
-$text-deep-green: #6E6539;
-$line-bk: #3d3d3d;
-$line-cream: #E4DECC;
-$line-red: #e60039;
-$pagination-cream: #E4DECC;
-$bg-mitsukejouzu: rgba(187, 174, 112, 1);
+// ============================================
+// Colors
+// ============================================
 
-$font-family-base: system-ui, sans-serif;
+$accent: #2f6b34; // アクセント（1色・最小限）
+$ink: #232720; // 文字・主
+$sub: #5c665a; // 文字・副
+$muted: #8c948a; // 文字・メタ
+$bg: #fbfcfa; // 地 / 背景
+$band: #f3f6f1; // 背景・一段（ABOUT / CONTACT の帯）
+$panel: #f7faf5; // パネル面
+$placeholder: #ffffff; // プレースホルダの地
+$line: #e3eadd; // 罫線 / ボーダー
+$selection-text: #f6f2e9; // ::selection の文字色
+$on-accent: #fcfaf5; // アクセント面の上に乗る文字色（View all ボタン hover）
+
+// ============================================
+// Font families
+// ============================================
+
+$font-ja: 'Noto Serif JP', serif; // 和文（基調）
+$font-en: 'Cormorant Garamond', serif; // 欧文（ラベル・数字・リンク）
+$font-mono: ui-monospace, menlo, monospace; // プレースホルダのラベル
+
+// ============================================
+// Breakpoints
+// ============================================
 
 $sp-size: "(max-width: 768px)";
 $pc-size: "(min-width: 769px)";

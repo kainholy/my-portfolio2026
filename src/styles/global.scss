@@ -1,2 +1,18 @@
-@use 'foundation/variables';
 @use 'foundation/base';
+@use 'foundation' as *;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @include font-base;
+
+  background: $bg;
+  color: $ink;
+}
+
+::selection {
+  background: $accent;
+  color: $selection-text;
+}
