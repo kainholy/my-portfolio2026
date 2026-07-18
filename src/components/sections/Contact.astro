@@ -16,8 +16,7 @@ const { labelEn, message, email } = topPage.contact;
   @use 'foundation' as *;
 
   .contact {
-    background: $band;
-    border-top: 1px solid $line;
+    background: $accent;
 
     &__inner {
       max-width: 1040px;
@@ -30,18 +29,18 @@ const { labelEn, message, email } = topPage.contact;
       @include heading-section-label;
 
       margin: 0;
+      color: $on-accent;
     }
 
     &__message {
       margin: 28px 0 0;
       font-size: 15px;
       letter-spacing: 0.1em;
-      color: $sub;
+      color: rgba($on-accent, 0.8);
     }
 
     &__email {
       @include font-en;
-      @include link-text-hover;
 
       display: inline-block;
       max-width: 100%;
@@ -49,7 +48,13 @@ const { labelEn, message, email } = topPage.contact;
       padding-bottom: 6px;
       font-size: clamp(26px, 4vw, 40px);
       letter-spacing: 0.04em;
-      border-bottom: 1px solid $line;
+      color: $on-accent;
+      border-bottom: 1px solid rgba($on-accent, 0.4);
+      transition: border-color 0.3s ease;
+
+      &:hover {
+        border-bottom-color: $on-accent;
+      }
 
       @include sp-view {
         font-size: clamp(18px, 6vw, 24px);

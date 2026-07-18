@@ -24,10 +24,10 @@ export const topPage: TopPage = {
   works: {
     heading: { labelEn: 'Works', labelJa: '実績' },
     leadCount: 2,
-    restCount: 3,
+    restCount: 6,
     visitLabel: 'Visit site →',
     viewAllLabel: 'View all →',
-    viewAllHref: '#',
+    viewAllHref: '/works/',
   },
 
   about: {
@@ -43,7 +43,7 @@ export const topPage: TopPage = {
       {
         id: 'sea',
         year: '2022 —',
-        text: '株式会社Sea にフロントエンドエンジニアとして参加。約20件のプロジェクトを公開。',
+        text: '株式会社Sea にフロントエンドエンジニアとして参画。約20件のプロジェクトに参加し、webを公開。',
       },
       {
         id: 'digital-garage',

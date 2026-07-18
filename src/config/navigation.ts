@@ -3,16 +3,15 @@ export type NavItem = {
   href: string;
 };
 
-/** ヘッダーのグローバルナビ（ページ内アンカー） */
+/** ヘッダーのグローバルナビ（ホーム＋アンカー。サブページからも機能する） */
 export const globalNav: NavItem[] = [
-  { label: 'Works', href: '#works' },
-  { label: 'About', href: '#about' },
-  { label: 'Can Do', href: '#can-do' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Works', href: '/#works' },
+  { label: 'About', href: '/#about' },
+  { label: 'Can Do', href: '/#can-do' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 /** フッターの外部リンク */
 export const socialLinks: NavItem[] = [
-  { label: 'X', href: '#' },
-  { label: 'GitHub', href: '#' },
+  { label: 'X', href: 'https://x.com/study_career117' },
 ];
