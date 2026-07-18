@@ -1,9 +1,59 @@
 ---
+import { topPage } from '@/data';
+
+const { labelEn, message, email } = topPage.contact;
 ---
 
 <section id="contact" class="contact">
-  CONTACT
+  <div class="contact__inner">
+    <p class="contact__label" data-reveal>{labelEn}</p>
+    <p class="contact__message" data-reveal>{message}</p>
+    <a class="contact__email" href={`mailto:${email}`} data-reveal>{email}</a>
+  </div>
 </section>
 
 <style lang="scss">
+  @use 'foundation' as *;
+
+  .contact {
+    background: $band;
+    border-top: 1px solid $line;
+
+    &__inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: clamp(90px, 13vw, 170px) clamp(24px, 6vw, 80px);
+      text-align: center;
+    }
+
+    &__label {
+      @include heading-section-label;
+
+      margin: 0;
+    }
+
+    &__message {
+      margin: 28px 0 0;
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      color: $sub;
+    }
+
+    &__email {
+      @include font-en;
+      @include link-text-hover;
+
+      display: inline-block;
+      max-width: 100%;
+      margin: 22px 0 0;
+      padding-bottom: 6px;
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid $line;
+
+      @include sp-view {
+        font-size: clamp(18px, 6vw, 24px);
+      }
+    }
+  }
 </style>

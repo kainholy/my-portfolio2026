@@ -1,9 +1,138 @@
 ---
+import { Image } from 'astro:assets';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { topPage } from '@/data';
+
+const { heading, items, note } = topPage.canDo;
 ---
 
 <section id="can-do" class="can-do">
-  CAN DO
+  <div class="can-do__heading">
+    <SectionHeading heading={heading} />
+  </div>
+
+  <div class="can-do__body" data-reveal>
+    <div class="can-do__grid">
+      {
+        items.map((item) => (
+          <article class="can-do__item">
+            <div class="can-do__item-head">
+              <span class="can-do__item-number">{item.number}</span>
+              <h3 class="can-do__item-name">{item.name}</h3>
+            </div>
+            <div class="can-do__item-image">
+              {item.image ? (
+                <Image
+                  class="can-do__item-image-media"
+                  src={item.image}
+                  alt=""
+                  format="webp"
+                  widths={[400, 800]}
+                  sizes="(max-width: 768px) 100vw, 480px"
+                />
+              ) : (
+                <span class="can-do__item-placeholder">{item.placeholder}</span>
+              )}
+            </div>
+            <p class="can-do__item-description">{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+    <p class="can-do__note">{note}</p>
+  </div>
 </section>
 
 <style lang="scss">
+  @use 'foundation' as *;
+
+  .can-do {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(90px, 13vw, 180px) clamp(24px, 6vw, 80px);
+
+    &__heading {
+      margin-bottom: clamp(44px, 6vw, 72px);
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(36px, 5vw, 56px) clamp(36px, 5vw, 64px);
+
+      @include sp-view {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__item-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    &__item-number {
+      @include font-en;
+
+      font-style: italic;
+      font-size: 20px;
+      color: $accent;
+    }
+
+    &__item-name {
+      @include heading-service;
+
+      margin: 0;
+    }
+
+    &__item-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: $panel;
+      border: 1px solid $line;
+    }
+
+    &__item-image-media {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__item-placeholder {
+      @include font-mono;
+
+      padding: 0 16px;
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.08em;
+      text-align: center;
+      color: $muted;
+    }
+
+    &__item-description {
+      margin: 16px 0 0;
+      font-size: 13.5px;
+      line-height: 1.9;
+      letter-spacing: 0.07em;
+      color: $sub;
+    }
+
+    &__note {
+      margin: clamp(40px, 5vw, 56px) 0 0;
+      font-size: 14px;
+      line-height: 1.95;
+      letter-spacing: 0.07em;
+      color: $sub;
+    }
+  }
 </style>

@@ -1,4 +1,5 @@
 ---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
 import WorkCard from '@/components/works/WorkCard.astro';
 import { topPage, works } from '@/data';
 
@@ -9,10 +10,8 @@ const restWorks = works.slice(leadCount, leadCount + restCount);
 ---
 
 <section id="works" class="works">
-  <div class="works__heading" data-reveal>
-    <span class="works__heading-label">{heading.labelEn}</span>
-    <span class="works__heading-ja">{heading.labelJa}</span>
-    <span class="works__heading-rule"></span>
+  <div class="works__heading">
+    <SectionHeading heading={heading} />
   </div>
 
   <div class="works__grid works__grid--lead">
@@ -32,31 +31,12 @@ const restWorks = works.slice(leadCount, leadCount + restCount);
   @use 'foundation' as *;
 
   .works {
-    max-width: 1040px;
+    max-width: 1240px;
     margin: 0 auto;
     padding: clamp(90px, 13vw, 180px) clamp(24px, 6vw, 80px) 0;
 
     &__heading {
-      display: flex;
-      align-items: baseline;
-      gap: 18px;
       margin-bottom: clamp(48px, 7vw, 88px);
-    }
-
-    &__heading-label {
-      @include heading-section-label;
-    }
-
-    &__heading-ja {
-      @include heading-section-ja;
-
-      margin-left: 6px;
-    }
-
-    &__heading-rule {
-      flex: 1;
-      height: 1px;
-      background: $line;
     }
 
     &__grid {
@@ -66,12 +46,23 @@ const restWorks = works.slice(leadCount, leadCount + restCount);
     &__grid--lead {
       grid-template-columns: 1fr 1fr;
       gap: clamp(48px, 7vw, 88px) clamp(36px, 5vw, 64px);
+
+      @include sp-view {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
     }
 
     &__grid--rest {
       grid-template-columns: 1fr 1fr 1fr;
       gap: clamp(40px, 5vw, 56px) clamp(28px, 4vw, 44px);
       margin-top: clamp(48px, 7vw, 88px);
+
+      @include sp-view {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 20px;
+        margin-top: 48px;
+      }
     }
 
     &__more {

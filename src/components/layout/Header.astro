@@ -1,14 +1,206 @@
 ---
+import { site } from '@/config/site';
+import { globalNav } from '@/config/navigation';
 ---
 
-<header class="header">
-  ヘッダー
+<header class="header" data-header>
+  <div class="header__inner">
+    <a class="header__logo" href="#top">{site.name}</a>
+
+    <nav class="header__nav">
+      {
+        globalNav.map((item) => (
+          <a class="header__nav-link" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button
+      class="header__toggle"
+      type="button"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="global-menu"
+      data-menu-toggle
+    >
+      <span class="header__toggle-bar"></span>
+      <span class="header__toggle-bar"></span>
+    </button>
+  </div>
+
+  <div class="header__drawer" id="global-menu" data-menu-drawer>
+    <nav class="header__drawer-nav">
+      {
+        globalNav.map((item) => (
+          <a class="header__drawer-link" href={item.href} data-menu-link>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-menu-link]');
 
+  if (header && toggle) {
+    const setOpen = (open: boolean) => {
+      header.classList.toggle('is-menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(!header.classList.contains('is-menu-open'));
+    });
+
+    links.forEach((link) => link.addEventListener('click', () => setOpen(false)));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  }
 </script>
 
 <style lang="scss">
-  
+  @use 'foundation' as *;
+
+  .header {
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+
+    &__inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 20px clamp(24px, 6vw, 80px);
+      background: $bg;
+      backdrop-filter: saturate(120%) blur(8px);
+      border-bottom: 1px solid $line;
+    }
+
+    &__logo {
+      @include font-en;
+
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    &__nav {
+      display: flex;
+      gap: 30px;
+
+      @include sp-view {
+        display: none;
+      }
+    }
+
+    &__nav-link {
+      @include font-en;
+      @include link-text-hover;
+
+      font-size: 12.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: $sub;
+    }
+
+    // ハンバーガーボタン（SPのみ）
+    &__toggle {
+      position: relative;
+      display: none;
+      width: 28px;
+      height: 16px;
+      cursor: pointer;
+
+      @include sp-view {
+        display: block;
+      }
+    }
+
+    &__toggle-bar {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: $ink;
+      transition: transform 0.3s ease;
+
+      &:nth-child(1) {
+        top: 4px;
+      }
+
+      &:nth-child(2) {
+        bottom: 4px;
+      }
+    }
+
+    // 全画面ドロワー（SPのみ）
+    &__drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: $bg;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+
+      @include sp-view {
+        display: flex;
+      }
+    }
+
+    &__drawer-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+
+    &__drawer-link {
+      @include font-en;
+      @include link-text-hover;
+
+      font-size: 24px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $sub;
+    }
+
+    // 開いた状態
+    &.is-menu-open {
+      .header__toggle-bar {
+        &:nth-child(1) {
+          transform: translateY(3.5px) rotate(45deg);
+        }
+
+        &:nth-child(2) {
+          transform: translateY(-3.5px) rotate(-45deg);
+        }
+      }
+
+      .header__drawer {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
 </style>

@@ -94,8 +94,8 @@ export type AboutSection = {
   name: string;
   /** 氏名（欧文） */
   nameEn: string;
-  /** 顔写真のパス。未設定なら null */
-  photo: string | null;
+  /** 顔写真。未設定ならプレースホルダを表示する */
+  photo: ImageMetadata | null;
   /** 本文。1要素が1段落に対応する */
   paragraphs: string[];
   history: AboutHistoryItem[];
@@ -113,8 +113,8 @@ export type CanDoItem = {
   number: string;
   name: string;
   description: string;
-  /** デザイン側の画像スロットに対応するID */
-  imageSlot: string;
+  /** イメージ画像。未設定ならプレースホルダを表示する */
+  image: ImageMetadata | null;
   /** 画像未設定時に出すプレースホルダの説明 */
   placeholder: string;
 };

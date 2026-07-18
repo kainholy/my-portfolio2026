@@ -1,5 +1,11 @@
 import type { WorkItem } from '@/types/topPage';
 
+import albionFlarune from '@/assets/images/work-albion-flarune.png';
+import albionInfinesse from '@/assets/images/work-albion-infinesse.png';
+import fujiMediaTechnology from '@/assets/images/work-fuji-media-technology.png';
+import fuujin from '@/assets/images/work-fuujin.png';
+import seaInc from '@/assets/images/work-sea-inc.png';
+
 /** WORKS（実績）。掲載順はこの配列の順序に従う */
 export const works: WorkItem[] = [
   {
@@ -10,7 +16,7 @@ export const works: WorkItem[] = [
     description: 'メディア技術を担うグループ会社のコーポレートサイト。情報設計から実装まで担当。',
     technologies: 'Next.js / TypeScript',
     url: 'https://fuji-mt.co.jp/',
-    thumbnail: null,
+    thumbnail: fujiMediaTechnology,
   },
   {
     id: 'fuujin',
@@ -20,7 +26,7 @@ export const works: WorkItem[] = [
     description: '学生団体の魅力を伝える公式サイト。軽やかなアニメーションで演武の躍動感を表現。',
     technologies: 'Astro / GSAP',
     url: 'https://fuujin4351.com/',
-    thumbnail: null,
+    thumbnail: fuujin,
   },
   {
     id: 'albion-infinesse',
@@ -29,8 +35,8 @@ export const works: WorkItem[] = [
     name: 'ALBION — infinesse 海外向けサイト',
     description: 'スキンケアブランドの海外向けサイト。ブランドの世界観を保ちつつ多言語で構築。',
     technologies: 'WordPress',
-    url: null,
-    thumbnail: null,
+    url: 'https://www.albion-cosmetics.com/seasonal/infinesse/sg/',
+    thumbnail: albionInfinesse,
   },
   {
     id: 'albion-flarune',
@@ -39,8 +45,8 @@ export const works: WorkItem[] = [
     name: 'ALBION — FLARUNE 海外向けサイト',
     description: 'フレグランスラインの海外向けサイト。繊細なトーンと余白でブランド価値を訴求。',
     technologies: 'WordPress',
-    url: null,
-    thumbnail: null,
+    url: 'https://www.albion-cosmetics.com/seasonal/flarune/sg/',
+    thumbnail: albionFlarune,
   },
   {
     id: 'sea-inc',
@@ -50,7 +56,7 @@ export const works: WorkItem[] = [
     description: '所属する制作会社のコーポレートサイト。フロントエンド実装を担当。',
     technologies: 'React / Next.js',
     url: 'https://seainc.jp/',
-    thumbnail: null,
+    thumbnail: seaInc,
   },
   {
     id: 'penmark',

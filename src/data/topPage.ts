@@ -1,5 +1,11 @@
 import type { TopPage } from '@/types/topPage';
 
+import aboutPhoto from '@/assets/images/about.JPG';
+import cando1 from '@/assets/images/cando-1.png';
+import cando2 from '@/assets/images/cando-2.png';
+import cando3 from '@/assets/images/cando-3.png';
+import cando4 from '@/assets/images/cando-4.png';
+
 /**
  * トップページの文言。
  * デザイン（Portfolio Top.dc.html）を正とする。
@@ -28,7 +34,7 @@ export const topPage: TopPage = {
     heading: { labelEn: 'About', labelJa: '自己紹介' },
     name: '大倉 聖哉',
     nameEn: 'Okura Seiya',
-    photo: null,
+    photo: aboutPhoto,
     paragraphs: [
       'ブランディングから考え、価値を伝える Web を実装します。アクセシビリティと SEO を踏まえ、売上に結びつくサイトへ。アニメーションをはじめとした表現面の作り込みも得意としています。',
       '抱える悩みに試行錯誤し、専門家として技術力を惜しみなく提供する。相手の期待を上回ることを自ら目指し、納品後も伴走を続ける。一番大事にしているのは「信頼」です。',
@@ -60,7 +66,7 @@ export const topPage: TopPage = {
         number: '01',
         name: '新規webサイト制作',
         description: '目的の整理から設計・実装まで、新規サイトを一貫して構築します。',
-        imageSlot: 'svc-new',
+        image: cando1,
         placeholder: 'ゼロから立ち上げるサイトのイメージ',
       },
       {
@@ -68,7 +74,7 @@ export const topPage: TopPage = {
         number: '02',
         name: 'webサイトリニューアル',
         description: '既存サイトの課題を洗い出し、成果につながる形へ作り替えます。',
-        imageSlot: 'svc-renew',
+        image: cando2,
         placeholder: '刷新前後を想起させるイメージ',
       },
       {
@@ -76,7 +82,7 @@ export const topPage: TopPage = {
         number: '03',
         name: 'webサイト保守・更新',
         description: '公開後の更新・改善・保守を継続的にサポートします。',
-        imageSlot: 'svc-maintain',
+        image: cando3,
         placeholder: '継続的な運用・更新のイメージ',
       },
       {
@@ -84,7 +90,7 @@ export const topPage: TopPage = {
         number: '04',
         name: '業務効率化システム開発',
         description: 'Webアプリや業務システムなど、機能面の開発にも対応します。',
-        imageSlot: 'svc-system',
+        image: cando4,
         placeholder: '仕組み・アプリ開発のイメージ',
       },
     ],
