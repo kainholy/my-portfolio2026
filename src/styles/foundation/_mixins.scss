@@ -1,6 +1,116 @@
 @use 'variables' as *;
 
-// media query mixin
+// ============================================
+// Font families
+// ============================================
+
+@mixin font-ja {
+  font-family: $font-ja;
+}
+
+@mixin font-en {
+  font-family: $font-en;
+}
+
+@mixin font-mono {
+  font-family: $font-mono;
+}
+
+/// body に当てる基本のテキスト設定
+@mixin font-base {
+  @include font-ja;
+
+  letter-spacing: 0.06em;
+  font-feature-settings: 'palt';
+  -webkit-font-smoothing: antialiased;
+}
+
+// ============================================
+// Link
+// ============================================
+
+/// テキストリンクのホバー。文字色が変わるリンクにだけ付与する
+@mixin link-text-hover {
+  transition: color 0.3s ease-out;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+// ============================================
+// Headings
+// ============================================
+
+/// ファーストビューの見出し（h1）
+@mixin heading-fv {
+  @include font-ja;
+
+  font-weight: 400;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+}
+
+/// セクションの欧文ラベル（WORKS / ABOUT ...）
+@mixin heading-section-label {
+  @include font-en;
+
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: $accent;
+}
+
+/// セクションの和文ラベル（実績 / 自己紹介 ...）
+@mixin heading-section-ja {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: $muted;
+}
+
+/// WORKS 大カードの案件名
+@mixin heading-work-lead {
+  @include font-ja;
+
+  font-weight: 400;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.55;
+  letter-spacing: 0.05em;
+}
+
+/// WORKS 小カードの案件名
+@mixin heading-work-rest {
+  @include font-ja;
+
+  font-weight: 400;
+  font-size: clamp(15px, 1.6vw, 16.5px);
+  line-height: 1.55;
+  letter-spacing: 0.05em;
+}
+
+/// ABOUT の氏名（h2）
+@mixin heading-about-name {
+  @include font-ja;
+
+  font-weight: 500;
+  font-size: clamp(20px, 2.4vw, 23px);
+  letter-spacing: 0.06em;
+}
+
+/// CAN DO のサービス名
+@mixin heading-service {
+  @include font-ja;
+
+  font-weight: 400;
+  font-size: clamp(17px, 2vw, 20px);
+  letter-spacing: 0.05em;
+}
+
+// ============================================
+// Media query
+// ============================================
+
 @mixin respond-to($media) {
   @media #{$media} {
     @content;
@@ -19,7 +129,10 @@
   }
 }
 
-// viewport width mixin
+// ============================================
+// Viewport width
+// ============================================
+
 @function pvw($px) {
   @return calc($px / 1440 * 100vw);
 }

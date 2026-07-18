@@ -1,0 +1,41 @@
+---
+import type { SectionHeading } from '@/types/topPage';
+
+interface Props {
+  heading: SectionHeading;
+}
+
+const { heading } = Astro.props;
+---
+
+<div class="section-heading" data-reveal>
+  <span class="section-heading__label">{heading.labelEn}</span>
+  <span class="section-heading__ja">{heading.labelJa}</span>
+  <span class="section-heading__rule"></span>
+</div>
+
+<style lang="scss">
+  @use 'foundation' as *;
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+
+    &__label {
+      @include heading-section-label;
+    }
+
+    &__ja {
+      @include heading-section-ja;
+
+      margin-left: 6px;
+    }
+
+    &__rule {
+      flex: 1;
+      height: 1px;
+      background: $line;
+    }
+  }
+</style>

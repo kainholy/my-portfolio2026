@@ -1,15 +1,17 @@
 export type NavItem = {
   label: string;
   href: string;
-  children?: NavItem[];
 };
 
-/** グローバルナビ（サイトマップ準拠） */
+/** ヘッダーのグローバルナビ（ホーム＋アンカー。サブページからも機能する） */
 export const globalNav: NavItem[] = [
-  { label: '株式会社東海シジシー', href: '/' },
-  { label: '私たちについて', href: '/cgc/' },
-  { label: 'メンバー企業', href: '/store/' },
-  { label: '商品紹介', href: '/product/' },
-  { label: '企業情報', href: '/company/' },
-  { label: '採用情報', href: '/recruit/' },
+  { label: 'Works', href: '/#works' },
+  { label: 'About', href: '/#about' },
+  { label: 'Can Do', href: '/#can-do' },
+  { label: 'Contact', href: '/#contact' },
+];
+
+/** フッターの外部リンク */
+export const socialLinks: NavItem[] = [
+  { label: 'X', href: 'https://x.com/study_career117' },
 ];

@@ -1,11 +1,56 @@
 ---
-
+import { site } from '@/config/site';
+import { socialLinks } from '@/config/navigation';
 ---
 
 <footer class="footer">
-  フッター
+  <span class="footer__copyright">{site.copyright}</span>
+  <div class="footer__links">
+    {
+      socialLinks.map((item) => (
+        <a class="footer__link" href={item.href} target="_blank" rel="noopener">
+          {item.label} ↗
+        </a>
+      ))
+    }
+  </div>
 </footer>
 
 <style lang="scss">
-  
+  @use 'foundation' as *;
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 30px clamp(24px, 6vw, 80px);
+
+    @include sp-view {
+      flex-direction: column;
+      gap: 16px;
+      padding: 32px clamp(24px, 6vw, 80px);
+    }
+
+    &__copyright {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: $muted;
+    }
+
+    &__links {
+      display: flex;
+      gap: 24px;
+    }
+
+    &__link {
+      @include font-en;
+      @include link-text-hover;
+
+      font-size: 12.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: $sub;
+    }
+  }
 </style>

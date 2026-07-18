@@ -1,0 +1,182 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { topPage } from '@/data';
+
+const { heading, name, nameEn, photo, paragraphs, history } = topPage.about;
+---
+
+<section id="about" class="about">
+  <div class="about__inner">
+    <div class="about__heading">
+      <SectionHeading heading={heading} />
+    </div>
+
+    <div class="about__profile">
+      <div class="about__photo" data-reveal>
+        {
+          photo ? (
+            <Image
+              class="about__photo-image"
+              src={photo}
+              alt=""
+              format="webp"
+              widths={[200, 400]}
+              sizes="200px"
+            />
+          ) : (
+            <span class="about__photo-placeholder">photo</span>
+          )
+        }
+      </div>
+
+      <div class="about__body" data-reveal>
+        <h2 class="about__name">
+          {name}<span class="about__name-en">{nameEn}</span>
+        </h2>
+        {paragraphs.map((paragraph) => <p class="about__paragraph">{paragraph}</p>)}
+      </div>
+    </div>
+
+    <dl class="about__history">
+      {
+        history.map((item) => (
+          <div class="about__history-row">
+            <dt class="about__history-year">{item.year}</dt>
+            <dd class="about__history-text">{item.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style lang="scss">
+  @use 'foundation' as *;
+
+  .about {
+    margin-top: clamp(90px, 13vw, 180px);
+    background: $band;
+
+    &__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: clamp(80px, 11vw, 150px) clamp(24px, 6vw, 80px);
+    }
+
+    &__heading {
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+
+    &__profile {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: clamp(36px, 5vw, 72px);
+      align-items: start;
+
+      @include sp-view {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    &__photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+
+      @include sp-view {
+        width: 160px;
+      }
+      background: repeating-linear-gradient(
+        135deg,
+        $placeholder,
+        $placeholder 7px,
+        $panel 7px,
+        $panel 14px
+      );
+      border: 1px solid $line;
+    }
+
+    &__photo-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__photo-placeholder {
+      @include font-mono;
+
+      font-size: 9px;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      color: $muted;
+    }
+
+    &__name {
+      @include heading-about-name;
+
+      margin: 0;
+    }
+
+    &__name-en {
+      @include font-en;
+
+      margin-left: 14px;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.7em;
+      letter-spacing: 0.04em;
+      color: $muted;
+    }
+
+    &__paragraph {
+      margin: 24px 0 0;
+      font-size: 15px;
+      line-height: 1.95;
+      letter-spacing: 0.07em;
+      color: $sub;
+
+      &:first-of-type {
+        margin-top: 32px;
+        color: $ink;
+      }
+    }
+
+    &__history {
+      margin-top: 44px;
+      border-top: 1px solid $line;
+    }
+
+    &__history-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      padding: 18px 0;
+      border-bottom: 1px solid $line;
+
+      @include sp-view {
+        grid-template-columns: 88px 1fr;
+        gap: 4px;
+      }
+    }
+
+    &__history-year {
+      @include font-en;
+
+      font-weight: 400;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      color: $accent;
+    }
+
+    &__history-text {
+      font-size: 13.5px;
+      line-height: 1.85;
+      letter-spacing: 0.06em;
+      color: $sub;
+    }
+  }
+</style>

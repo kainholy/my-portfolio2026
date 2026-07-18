@@ -1,0 +1,45 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import WorkCard from '@/components/works/WorkCard.astro';
+import { topPage, works } from '@/data';
+
+const { heading, visitLabel } = topPage.works;
+---
+
+<PageLayout title="Works">
+  <section class="works-page">
+    <div class="works-page__heading">
+      <SectionHeading heading={heading} />
+    </div>
+
+    <div class="works-page__grid">
+      {works.map((work) => <WorkCard work={work} variant="lead" visitLabel={visitLabel} />)}
+    </div>
+  </section>
+</PageLayout>
+
+<style lang="scss">
+  @use 'foundation' as *;
+
+  .works-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(120px, 18vw, 200px) clamp(24px, 6vw, 80px) clamp(90px, 13vw, 160px);
+
+    &__heading {
+      margin-bottom: clamp(48px, 7vw, 88px);
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 88px) clamp(36px, 5vw, 64px);
+
+      @include sp-view {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import WorkCard from '@/components/works/WorkCard.astro';
+import { topPage, works } from '@/data';
+
+const { heading, leadCount, restCount, visitLabel, viewAllLabel, viewAllHref } = topPage.works;
+
+const leadWorks = works.slice(0, leadCount);
+const restWorks = works.slice(leadCount, leadCount + restCount);
+---
+
+<section id="works" class="works">
+  <div class="works__heading">
+    <SectionHeading heading={heading} />
+  </div>
+
+  <div class="works__grid works__grid--lead">
+    {leadWorks.map((work) => <WorkCard work={work} variant="lead" visitLabel={visitLabel} />)}
+  </div>
+
+  <div class="works__grid works__grid--rest">
+    {restWorks.map((work) => <WorkCard work={work} variant="rest" visitLabel={visitLabel} />)}
+  </div>
+
+  <div class="works__more" data-reveal>
+    <a class="works__view-all" href={viewAllHref}>{viewAllLabel}</a>
+  </div>
+</section>
+
+<style lang="scss">
+  @use 'foundation' as *;
+
+  .works {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(90px, 13vw, 180px) clamp(24px, 6vw, 80px) 0;
+
+    &__heading {
+      margin-bottom: clamp(48px, 7vw, 88px);
+    }
+
+    &__grid {
+      display: grid;
+    }
+
+    &__grid--lead {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 88px) clamp(36px, 5vw, 64px);
+
+      @include sp-view {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    &__grid--rest {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(40px, 5vw, 56px) clamp(28px, 4vw, 44px);
+      margin-top: clamp(48px, 7vw, 88px);
+
+      @include sp-view {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 20px;
+        margin-top: 48px;
+      }
+    }
+
+    &__more {
+      display: flex;
+      justify-content: center;
+      margin-top: clamp(56px, 8vw, 96px);
+    }
+
+    &__view-all {
+      @include font-en;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 158px;
+      height: 37px;
+      padding: 16px 40px;
+      border: 1px solid $accent;
+      font-style: italic;
+      font-size: 13.5px;
+      letter-spacing: 0.14em;
+      text-align: center;
+      color: $accent;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+      &:hover {
+        background: $accent;
+        color: $on-accent;
+      }
+    }
+  }
+</style>
