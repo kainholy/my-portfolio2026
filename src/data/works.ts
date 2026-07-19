@@ -82,7 +82,7 @@ export const works: WorkItem[] = [
   {
     id: 'story-and-co',
     number: '07',
-    category: '',
+    category: 'コーポレート',
     name: 'STORY&Co.',
     description: '',
     technologies: '',
@@ -92,7 +92,7 @@ export const works: WorkItem[] = [
   {
     id: 'yard',
     number: '08',
-    category: '',
+    category: 'ティザーサイト',
     name: 'Yard ティザーサイト',
     description: '',
     technologies: '',

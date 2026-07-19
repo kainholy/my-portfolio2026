@@ -10,7 +10,10 @@ import { globalNav } from '@/config/navigation';
     <nav class="header__nav">
       {
         globalNav.map((item) => (
-          <a class="header__nav-link" href={item.href}>
+          <a
+            class:list={['header__nav-link', item.cta && 'header__nav-link--cta']}
+            href={item.href}
+          >
             {item.label}
           </a>
         ))
@@ -34,7 +37,11 @@ import { globalNav } from '@/config/navigation';
     <nav class="header__drawer-nav">
       {
         globalNav.map((item) => (
-          <a class="header__drawer-link" href={item.href} data-menu-link>
+          <a
+            class:list={['header__drawer-link', item.cta && 'header__drawer-link--cta']}
+            href={item.href}
+            data-menu-link
+          >
             {item.label}
           </a>
         ))
@@ -69,6 +76,7 @@ import { globalNav } from '@/config/navigation';
 </script>
 
 <style lang="scss">
+  @use 'sass:color';
   @use 'foundation' as *;
 
   .header {
@@ -100,6 +108,7 @@ import { globalNav } from '@/config/navigation';
 
     &__nav {
       display: flex;
+      align-items: center;
       gap: 30px;
 
       @include sp-view {
@@ -116,6 +125,23 @@ import { globalNav } from '@/config/navigation';
       text-transform: uppercase;
       white-space: nowrap;
       color: $sub;
+
+      // Contact だけ塗りボタンとして強調
+      &--cta {
+        padding: 10px 22px;
+        color: $on-accent;
+        background: $accent;
+        border-radius: 999px;
+        transition:
+          background-color 0.3s ease,
+          transform 0.3s ease;
+
+        &:hover {
+          background: color.adjust($accent, $lightness: -6%);
+          color: $on-accent;
+          transform: translateY(-1px);
+        }
+      }
     }
 
     // ハンバーガーボタン（SPのみ）
@@ -183,6 +209,19 @@ import { globalNav } from '@/config/navigation';
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: $sub;
+
+      // Contact だけ塗りボタンとして強調
+      &--cta {
+        margin-top: 12px;
+        padding: 14px 40px;
+        color: $on-accent;
+        background: $accent;
+        border-radius: 999px;
+
+        &:hover {
+          color: $on-accent;
+        }
+      }
     }
 
     // 開いた状態
