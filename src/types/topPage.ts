@@ -122,7 +122,7 @@ export type CanDoItem = {
 export type CanDoSection = {
   heading: SectionHeading;
   items: CanDoItem[];
-  /** 一覧の下に添える注記 */
+  /** 見出しと一覧の間に添えるリード文 */
   note: string;
 };
 

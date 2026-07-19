@@ -1,18 +1,41 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '@/config/site';
-import { socialLinks } from '@/config/navigation';
+import { globalNav, socialLinks } from '@/config/navigation';
+import xIcon from '@/assets/images/x.png';
 ---
 
 <footer class="footer">
-  <span class="footer__copyright">{site.copyright}</span>
-  <div class="footer__links">
-    {
-      socialLinks.map((item) => (
-        <a class="footer__link" href={item.href} target="_blank" rel="noopener">
-          {item.label} ↗
-        </a>
-      ))
-    }
+  <div class="footer__main">
+    <nav class="footer__nav">
+      {
+        globalNav.map((item) => (
+          <a class="footer__nav-link" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="footer__links">
+      {
+        socialLinks.map((item) => (
+          <a
+            class="footer__link"
+            href={item.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={item.label}
+          >
+            <Image class="footer__icon" src={xIcon} alt={item.label} widths={[36, 72]} sizes="18px" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <span class="footer__copyright">{site.copyright}</span>
   </div>
 </footer>
 
@@ -20,22 +43,49 @@ import { socialLinks } from '@/config/navigation';
   @use 'foundation' as *;
 
   .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin: 0 auto;
-    padding: 30px clamp(24px, 6vw, 80px);
+    padding: clamp(48px, 7vw, 72px) clamp(24px, 6vw, 80px) 30px;
+    border-top: 1px solid $line;
 
-    @include sp-view {
-      flex-direction: column;
-      gap: 16px;
-      padding: 32px clamp(24px, 6vw, 80px);
+    // 罫線の上：内部リンク＋Xアイコン
+    &__main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+      padding-bottom: clamp(32px, 5vw, 48px);
+
+      @include sp-view {
+        flex-direction: column;
+        gap: 28px;
+      }
     }
 
-    &__copyright {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: $muted;
+    &__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+
+      @include sp-view {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    &__nav-link {
+      @include font-en;
+      @include link-text-hover;
+
+      font-size: 12.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: $sub;
+    }
+
+    &__bottom {
+      padding-top: clamp(24px, 4vw, 32px);
+      border-top: 1px solid $line;
     }
 
     &__links {
@@ -44,13 +94,25 @@ import { socialLinks } from '@/config/navigation';
     }
 
     &__link {
-      @include font-en;
-      @include link-text-hover;
+      display: inline-flex;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
 
-      font-size: 12.5px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: $sub;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &__icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    &__copyright {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: $muted;
     }
   }
 </style>

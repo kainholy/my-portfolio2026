@@ -11,44 +11,31 @@ interface Props {
 }
 
 const { work, variant, visitLabel } = Astro.props;
+
+// URL があればカード全体を外部リンク（a）に、無ければ通常の article にする
+const Tag = work.url ? 'a' : 'article';
+const linkProps = work.url
+  ? { href: work.url, target: '_blank', rel: 'noopener' }
+  : {};
 ---
 
-<article class:list={['work', `work--${variant}`]} data-reveal>
-  {
-    work.url ? (
-      <a class="work__thumbnail-link" href={work.url} target="_blank" rel="noopener">
-        <div class="work__thumbnail">
-          {work.thumbnail ? (
-            <Image
-              class="work__thumbnail-image"
-              src={work.thumbnail}
-              alt=""
-              format="webp"
-              widths={[400, 800]}
-              sizes="(max-width: 768px) 100vw, 480px"
-            />
-          ) : (
-            <span class="work__thumbnail-placeholder">screenshot</span>
-          )}
-        </div>
-      </a>
-    ) : (
-      <div class="work__thumbnail">
-        {work.thumbnail ? (
-          <Image
-            class="work__thumbnail-image"
-            src={work.thumbnail}
-            alt=""
-            format="webp"
-            widths={[400, 800]}
-            sizes="(max-width: 768px) 100vw, 480px"
-          />
-        ) : (
-          <span class="work__thumbnail-placeholder">screenshot</span>
-        )}
-      </div>
-    )
-  }
+<Tag class:list={['work', `work--${variant}`]} data-reveal {...linkProps}>
+  <div class="work__thumbnail">
+    {
+      work.thumbnail ? (
+        <Image
+          class="work__thumbnail-image"
+          src={work.thumbnail}
+          alt=""
+          format="webp"
+          widths={[400, 800]}
+          sizes="(max-width: 768px) 100vw, 480px"
+        />
+      ) : (
+        <span class="work__thumbnail-placeholder">screenshot</span>
+      )
+    }
+  </div>
 
   <div class="work__meta">
     <span class="work__number">{work.number}</span>
@@ -61,12 +48,15 @@ const { work, variant, visitLabel } = Astro.props;
 
   {
     work.url && (
-      <a class="work__visit" href={work.url} target="_blank" rel="noopener">
+      <span class="work__visit">
         {visitLabel}
-      </a>
+        <span class="work__visit-arrow" aria-hidden="true">
+          ↗
+        </span>
+      </span>
     )
   }
-</article>
+</Tag>
 
 <style lang="scss">
   @use 'foundation' as *;
@@ -91,14 +81,11 @@ const { work, variant, visitLabel } = Astro.props;
       border: 1px solid $line;
     }
 
-    &__thumbnail-link {
-      display: block;
-    }
-
     &__thumbnail-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease-out;
     }
 
     &__thumbnail-placeholder {
@@ -149,11 +136,39 @@ const { work, variant, visitLabel } = Astro.props;
     &__visit {
       @include font-en;
 
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
       margin-top: 14px;
       font-style: italic;
       font-size: 14px;
       letter-spacing: 0.06em;
       color: $accent;
+
+      @include pc-view {
+        font-size: 17px;
+      }
+
+      @include sp-view {
+        align-self: flex-end;
+      }
+    }
+
+    &__visit-arrow {
+      font-style: normal;
+      font-size: 14px;
+      transition: transform 0.3s ease-out;
+    }
+
+    // カード（リンク）ホバー時の反応
+    &:hover {
+      .work__thumbnail-image {
+        transform: scale(1.03);
+      }
+
+      .work__visit-arrow {
+        transform: translate(3px, -3px);
+      }
     }
 
     &--rest {
@@ -179,6 +194,10 @@ const { work, variant, visitLabel } = Astro.props;
       .work__visit {
         margin-top: 12px;
         font-size: 13px;
+
+        @include pc-view {
+          font-size: 17px;
+        }
       }
     }
   }

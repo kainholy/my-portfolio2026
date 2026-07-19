@@ -12,6 +12,8 @@ const { heading, items, note } = topPage.canDo;
   </div>
 
   <div class="can-do__body" data-reveal>
+    <p class="can-do__note">{note}</p>
+
     <div class="can-do__grid">
       {
         items.map((item) => (
@@ -39,7 +41,6 @@ const { heading, items, note } = topPage.canDo;
         ))
       }
     </div>
-    <p class="can-do__note">{note}</p>
   </div>
 </section>
 
@@ -47,7 +48,7 @@ const { heading, items, note } = topPage.canDo;
   @use 'foundation' as *;
 
   .can-do {
-    max-width: 1240px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: clamp(90px, 13vw, 180px) clamp(24px, 6vw, 80px);
 
@@ -128,11 +129,16 @@ const { heading, items, note } = topPage.canDo;
     }
 
     &__note {
-      margin: clamp(40px, 5vw, 56px) 0 0;
-      font-size: 14px;
+      margin: 0 0 clamp(40px, 5vw, 56px);
+      max-width: 60ch;
+      font-size: 17px;
       line-height: 1.95;
       letter-spacing: 0.07em;
-      color: $sub;
+      color: $ink;
+
+      @include sp-view {
+        font-size: 15px;
+      }
     }
   }
 </style>
